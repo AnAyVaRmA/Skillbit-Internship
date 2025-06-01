@@ -1,70 +1,51 @@
 #include <stdio.h>
-#include <stdbool.h>
-int add(int a,int b)
+#include <string.h>
+int main() 
 {
-    return(a+b);
-}
-int mul(int a,int b)
-{
-    return(a*b);
-}
-int sub(int a,int b)
-{
-    return(a-b);
-}
-int div(int a,int b)
-{
-    return(a/b);
-}
-int Calc(int a,int b)
-{
-    int op,calc=0;
-    printf("Select which operation you want to perform \n");
-    scanf("%d",&op);
-    switch(op)
-    {case 1:
-        calc=add(a,b);
-        break;
-    case 2:
-        calc=mul(a,b);
-        break;
-    case 3:
-        calc=sub(a,b);
-        break;
-    case 4:
-    if(b==0)
+    int iter = 0, a, b, res;
+    char op[2];
+    printf("Start calculating\nPress '=' to stop calculating\n");
+    scanf("%d", &a);
+    getchar();
+    while (iter == 0) 
     {
-        printf("Not valid \n");
-        break;
-    }
-    else
-    {
-        calc=div(a,b);
-        break;
-    }
-    }
-    printf("Your result is %d \n",calc);
-    return(calc);
-}
-int main ()
-{
-    int iter=0,res,Proceed,a,b;
-    while(1)
-    {
-        printf("Enter the two input number(s) \n");
-        if(iter==0)
-        {
-            printf("Enter the first number \n");
-            scanf("%d",&a);
+        fgets(op, sizeof(op), stdin);
+        op[strcspn(op, "\n")] = '\0';
+        if (strcmp(op, "=") == 0) {
+            printf("Final result: %d\n", a);
+            iter = 1;
+            break;
         }
-        else
-        a=res;
-        printf("Enter the next number \n");
-        scanf("%d",&b);
-        res=Calc(a,b);
-    printf("Proceed ? \n 1 for Yes \n 0 for No ");
-    scanf("%d",&Proceed);
-    if(Proceed==0) break;
-    iter=iter+1;
+        scanf("%d", &b);
+        getchar();
+        if (strcmp(op, "+") == 0) 
+        {
+            res = a + b;
+        } 
+        else if (strcmp(op, "-") == 0) 
+        {
+            res = a - b;
+        } 
+        else if (strcmp(op, "*") == 0) 
+        {
+            res = a * b;
+        } 
+        else if (strcmp(op, "/") == 0) 
+        {
+            if (b == 0) 
+            {
+                printf("Error: Division by zero\n");
+                continue;
+            }
+            res = a / b;
+        } 
+        else 
+        {
+            printf("Invalid operator\n");
+            continue;
+        }
+        printf("= %d\n", res);
+        a = res;
     }
+    return 0;
 }

@@ -68,10 +68,11 @@ void delete_file(const char *filename)
 }
 int main() 
 {
+    int out=0;
     char current_path[PATH_LEN];
     getcwd(current_path, sizeof(current_path));
     char command[PATH_LEN], arg1[PATH_LEN], arg2[PATH_LEN];
-    while (1) 
+    while (out==0) 
     {
         printf("\nCurrent Directory: %s\n", current_path);
         printf("Commands: ls | cd <dir> | mkdir <name> | cp <src> <dest> | mv <src> <dest> | rm <file> | exit\n> ");
@@ -115,6 +116,7 @@ int main()
         } 
         else if (strcmp(command, "exit") == 0) 
         {
+            out=1;
             break;
         } 
         else 
